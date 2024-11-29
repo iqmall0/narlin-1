@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pengurusan Maklumat Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #79acdf;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin: 20px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #94ddf1;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-bottom: 5px;
+        }
+        form input, form select, form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sistem Pengurusan Maklumat Ternakan</h1>
+    </header>
+
+    <nav>
+        <a href="#add-livestock">Tambah Ternakan</a>
+        <a href="#livestock-list">Senarai Ternakan</a>
+    </nav>
+
+    <main>
+        <!-- Form untuk menambah maklumat ternakan -->
+        <section id="add-livestock">
+            <h2>Tambah Maklumat Ternakan</h2>
+            <form action="proses_tambah.php" method="POST">
+                <label for="id-ternakan">ID Ternakan</label>
+                <input type="text" id="id-ternakan" name="id_ternakan" required>
+
+                <label for="nama-ternakan">Nama Ternakan</label>
+                <input type="text" id="nama-ternakan" name="nama_ternakan" required>
+
+                <label for="jenis-ternakan">Jenis Ternakan</label>
+                <select id="jenis-ternakan" name="jenis_ternakan">
+                    <option value="lembu">Lembu</option>
+                    <option value="kambing">Kambing</option>
+                </select>
+
+                <label for="umur-ternakan">Umur (Tahun)</label>
+                <textarea id="tarikh" name="tarikh"></textarea>
+
+                <label for="berat-ternakan">Berat (kg)</label>
+                <input type="number" id="berat-ternakan" name="berat_ternakan" required>
+
+                <label for="catatan">Catatan</label>
+                <textarea id="catatan" name="catatan"></textarea>
+
+                <button type="submit">Tambah Ternakan</button>
+            </form>
+        </section>
+
+        <!-- Senarai Ternakan -->
+        <section id="livestock-list">
+            <h2>Senarai Maklumat Ternakan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Ternakan</th>
+                        <th>Nama Ternakan</th>
+                        <th>Jenis</th>
+                        <th>Umur</th>
+                        <th>Berat</th>
+                        <th>Catatan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Baris contoh, data sebenar diambil dari pangkalan data -->
+                    <tr>
+                        <td>048</td>
+                        <td>Dopper</td>
+                        <td>kambing</td>
+                        <td>3</td>
+                        <td>43kg</td>
+                        <td>Sehat</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Kambing B</td>
+                        <td>Kambing</td>
+                        <td>2</td>
+                        <td>45</td>
+                        <td>Agak kurus</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Makanan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Makanan Ternakan</h1>
+    <form id="foodForm">
+        <label for="animal">Jenis Ternakan:</label>
+        <input type="text" id="animal" name="animal" required><br><br>
+
+        <label for="food">Jenis Makanan:</label>
+        <input type="text" id="food" name="food" required><br><br>
+
+        <label for="quantity">Kuantiti (kg):</label>
+        <input type="number" id="quantity" name="quantity" required><br><br>
+
+        <label for="date">Tarikh:</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <button type="button" onclick="addRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="recordTable">
+        <thead>
+            <tr>
+                <th>Jenis Ternakan</th>
+                <th>Jenis Makanan</th>
+                <th>Kuantiti (kg)</th>
+                <th>Tarikh</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        function addRecord() {
+            // Ambil data dari borang
+            const animal = document.getElementById("animal").value;
+            const food = document.getElementById("food").value;
+            const quantity = document.getElementById("quantity").value;
+            const date = document.getElementById("date").value;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("recordTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalCell = newRow.insertCell(0);
+            const foodCell = newRow.insertCell(1);
+            const quantityCell = newRow.insertCell(2);
+            const dateCell = newRow.insertCell(3);
+
+            animalCell.textContent = animal;
+            foodCell.textContent = food;
+            quantityCell.textContent = quantity;
+            dateCell.textContent = date;
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("foodForm").reset();
+        }
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Pendaftaran dan Pengenalan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Pendaftaran dan Pengenalan Ternakan</h1>
+    <form id="registrationForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="animalName">Nama Ternakan:</label>
+        <input type="text" id="animalName" name="animalName" required><br><br>
+
+        <label for="animalType">Jenis Ternakan:</label>
+        <input type="text" id="animalType" name="animalType" required><br><br>
+
+        <label for="birthDate">Tarikh Lahir:</label>
+        <input type="date" id="birthDate" name="birthDate" required><br><br>
+
+        <button type="button" onclick="addAnimalRecord()">Tambah Rekod</button>
+    </form>
+
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Pembiakan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Pembiakan Ternakan</h1>
+    <form id="breedingForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="breedingDate">Tarikh Pembiakan:</label>
+        <input type="date" id="breedingDate" name="breedingDate" required><br><br>
+
+        <label for="breedingType">Jenis Pembiakan:</label>
+        <input type="text" id="breedingType" name="breedingType" required><br><br>
+
+        <label for="successStatus">Status Kejayaan:</label>
+        <select id="successStatus" name="successStatus" required>
+            <option value="Berjaya">Berjaya</option>
+            <option value="Tidak Berjaya">Tidak Berjaya</option>
+        </select><br><br>
+
+        <button type="button" onclick="addBreedingRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="breedingTable">
+        <thead>
+            <tr>
+                <th>ID Ternakan</th>
+                <th>Tarikh Pembiakan</th>
+                <th>Jenis Pembiakan</th>
+                <th>Status Kejayaan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        function addBreedingRecord() {
+            // Ambil data dari borang
+            const animalID = document.getElementById("animalID").value;
+            const breedingDate = document.getElementById("breedingDate").value;
+            const breedingType = document.getElementById("breedingType").value;
+            const successStatus = document.getElementById("successStatus").value;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("breedingTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalIDCell = newRow.insertCell(0);
+            const breedingDateCell = newRow.insertCell(1);
+            const breedingTypeCell = newRow.insertCell(2);
+            const successStatusCell = newRow.insertCell(3);
+
+            animalIDCell.textContent = animalID;
+            breedingDateCell.textContent = breedingDate;
+            breedingTypeCell.textContent = breedingType;
+            successStatusCell.textContent = successStatus;
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("breedingForm").reset();
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Pembesaran Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #aad6f5;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Pembesaran Ternakan</h1>
+    <form id="growthForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="inspectionDate">Tarikh Pemeriksaan:</label>
+        <input type="date" id="inspectionDate" name="inspectionDate" required><br><br>
+
+        <label for="breed">Baka Ternakan:</label>
+        <input type="text" id="breed" name="breed" required><br><br>
+
+        <label for="type">Jenis Ternakan:</label>
+        <input type="text" id="type" name="type" required><br><br>
+
+        <label for="bodyScore">Skor Badan Ternakan:</label>
+        <input type="number" id="bodyScore" name="bodyScore" required><br><br>
+
+        <button type="button" onclick="addGrowthRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="growthTable">
+        <thead>
+            <tr>
+                <th>ID Ternakan</th>
+                <th>Tarikh Pemeriksaan</th>
+                <th>Baka Ternakan</th>
+                <th>Jenis Ternakan</th>
+                <th>Skor Badan Ternakan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        function addGrowthRecord() {
+            // Ambil data dari borang
+            const animalID = document.getElementById("animalID").value;
+            const inspectionDate = document.getElementById("inspectionDate").value;
+            const breed = document.getElementById("breed").value;
+            const type = document.getElementById("type").value;
+            const bodyScore = document.getElementById("bodyScore").value;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("growthTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalIDCell = newRow.insertCell(0);
+            const inspectionDateCell = newRow.insertCell(1);
+            const breedCell = newRow.insertCell(2);
+            const typeCell = newRow.insertCell(3);
+            const bodyScoreCell = newRow.insertCell(4);
+
+            animalIDCell.textContent = animalID;
+            inspectionDateCell.textContent = inspectionDate;
+            breedCell.textContent = breed;
+            typeCell.textContent = type;
+            bodyScoreCell.textContent = bodyScore;
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("growthForm").reset();
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Kesihatan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #0e0e0e;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Kesihatan Ternakan</h1>
+    <form id="healthForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="inspectionDate">Tarikh Pemeriksaan:</label>
+        <input type="date" id="inspectionDate" name="inspectionDate" required><br><br>
+
+        <label for="healthStatus">Status Kesihatan:</label>
+        <input type="text" id="healthStatus" name="healthStatus" required><br><br>
+
+        <label for="notes">Nota:</label>
+        <textarea id="notes" name="notes" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="button" onclick="addHealthRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="healthTable">
+        <thead>
+            <tr>
+                <th>ID Ternakan</th>
+                <th>Tarikh Pemeriksaan</th>
+                <th>Status Kesihatan</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        function addHealthRecord() {
+            // Ambil data dari borang
+            const animalID = document.getElementById("animalID").value;
+            const inspectionDate = document.getElementById("inspectionDate").value;
+            const healthStatus = document.getElementById("healthStatus").value;
+            const notes = document.getElementById("notes").value;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("healthTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalIDCell = newRow.insertCell(0);
+            const inspectionDateCell = newRow.insertCell(1);
+            const healthStatusCell = newRow.insertCell(2);
+            const notesCell = newRow.insertCell(3);
+
+            animalIDCell.textContent = animalID;
+            inspectionDateCell.textContent = inspectionDate;
+            healthStatusCell.textContent = healthStatus;
+            notesCell.textContent = notes;
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("healthForm").reset();
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Pemberian Ubat Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Pemberian Ubat Ternakan</h1>
+    <form id="medicationForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="medicationName">Nama Ubat:</label>
+        <input type="text" id="medicationName" name="medicationName" required><br><br>
+
+        <label for="medicationDate">Tarikh Pemberian:</label>
+        <input type="date" id="medicationDate" name="medicationDate" required><br><br>
+
+        <label for="dose">Dos (mg):</label>
+        <input type="number" id="dose" name="dose" required><br><br>
+
+        <label for="notes">Nota:</label>
+        <textarea id="notes" name="notes" rows="4" cols="50"></textarea><br><br>
+
+        <button type="button" onclick="addMedicationRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="medicationTable">
+        <thead>
+            <tr>
+                <th>ID Ternakan</th>
+                <th>Nama Ubat</th>
+                <th>Tarikh Pemberian</th>
+                <th>Dos (mg)</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        function addMedicationRecord() {
+            // Ambil data dari borang
+            const animalID = document.getElementById("animalID").value;
+            const medicationName = document.getElementById("medicationName").value;
+            const medicationDate = document.getElementById("medicationDate").value;
+            const dose = document.getElementById("dose").value;
+            const notes = document.getElementById("notes").value;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("medicationTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalIDCell = newRow.insertCell(0);
+            const medicationNameCell = newRow.insertCell(1);
+            const medicationDateCell = newRow.insertCell(2);
+            const doseCell = newRow.insertCell(3);
+            const notesCell = newRow.insertCell(4);
+
+            animalIDCell.textContent = animalID;
+            medicationNameCell.textContent = medicationName;
+            medicationDateCell.textContent = medicationDate;
+            doseCell.textContent = dose;
+            notesCell.textContent = notes;
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("medicationForm").reset();
+        }
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Perbezaan Berat Badan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Perbezaan Berat Badan Ternakan</h1>
+    <form id="weightForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="inspectionDate">Tarikh Pemeriksaan:</label>
+        <input type="date" id="inspectionDate" name="inspectionDate" required><br><br>
+
+        <label for="currentWeight">Berat Semasa (kg):</label>
+        <input type="number" id="currentWeight" name="currentWeight" required><br><br>
+
+        <button type="button" onclick="addWeightRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="weightTable">
+        <thead>
+            <tr>
+                <th>ID Ternakan</th>
+                <th>Tarikh Pemeriksaan</th>
+                <th>Berat Semasa (kg)</th>
+                <th>Perbezaan Berat (kg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        // Simpan berat badan terakhir setiap ternakan
+        const lastWeight = {};
+
+        function addWeightRecord() {
+            // Ambil data dari borang
+            const animalID = document.getElementById("animalID").value;
+            const inspectionDate = document.getElementById("inspectionDate").value;
+            const currentWeight = parseFloat(document.getElementById("currentWeight").value);
+
+            // Kira perbezaan berat
+            let weightDifference = 0;
+            if (lastWeight[animalID] !== undefined) {
+                weightDifference = currentWeight - lastWeight[animalID];
+            }
+
+            // Simpan berat semasa sebagai berat terakhir
+            lastWeight[animalID] = currentWeight;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("weightTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalIDCell = newRow.insertCell(0);
+            const inspectionDateCell = newRow.insertCell(1);
+            const currentWeightCell = newRow.insertCell(2);
+            const weightDifferenceCell = newRow.insertCell(3);
+
+            animalIDCell.textContent = animalID;
+            inspectionDateCell.textContent = inspectionDate;
+            currentWeightCell.textContent = currentWeight;
+            weightDifferenceCell.textContent = weightDifference.toFixed(2); // Tampilkan dua tempat perpuluhan
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("weightForm").reset();
+        }
+    </script>
+</body>
+</html>
